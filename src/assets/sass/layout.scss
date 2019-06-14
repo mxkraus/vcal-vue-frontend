@@ -1,0 +1,29 @@
+
+.ads-title{
+    font-size: 25px;
+    margin-left: 25px;
+    line-height: 45px;
+}
+
+
+.ads-bar{
+    background-color: $lightblue;
+    text-align: center;
+}
+
+.ads-drawer{
+    background-color: $lightgrey;
+
+    .nav-item{
+        color: $darkgrey;
+        font-size: 10px;
+        font-size: 1rem;
+    }
+
+}
+
+.ads-hamburger{
+    position: relative;
+    right: 1rem;
+    font-size: 30px;
+}
