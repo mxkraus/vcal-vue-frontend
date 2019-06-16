@@ -1,104 +1,53 @@
 <template>
-    <div id="app">
-        <vue-ads-layout
-            :full-bar="true"
-        >
-            <vue-ads-bar
-                slot="toolbar"
-                :fixed="true"
-                class="ads-bar"
-            >
-                <header class="ads-title" slot="first">Vereinskalender</header>
-                <vue-ads-hide-button
-                    slot="last"
-                    :hidden="hiddenRight"
-                    @clicked="hideRight"
-                    class="ads-hamburger"
-                />
+  <f7-app :params="f7Params">
 
-            </vue-ads-bar>
+    <f7-statusbar></f7-statusbar>
+    <f7-panel left cover resizable>
+      <f7-view url="/panel-left/" links-view=".view-main"></f7-view>
+    </f7-panel>
+    <f7-view url="/" :main="true" class="safe-areas" :master-detail-breakpoint="800"></f7-view>
 
-            <vue-ads-drawer
-                slot="right-drawer"
-                :fixed="true"
-                :minified="minifiedRight"
-                :hidden="hiddenRight"
-                :right="true"
-                class="ads-drawer"
-                @minify="minifyRight"
-                @hide="hideRight"
-            >
-
-                <b-nav vertical class="w-25">
-                    <b-nav-item class="nav-item" active to="/" >Home</b-nav-item>
-                    <b-nav-item class="nav-item" to="/event-list">Events</b-nav-item>
-                </b-nav>
-
-            </vue-ads-drawer>
-
- 
-            <router-view></router-view>
-
- 
-        </vue-ads-layout>
-    </div>
+  </f7-app>
 </template>
 
-
 <script>
+/* eslint-disable */
+  import { f7App, f7Panel, f7View, f7Statusbar } from 'framework7-vue';
+  import routes from './routes';
 
-import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
-import '../node_modules/vue-ads-layout/dist/vue-ads-layout.css';
-
-import { VueAdsLayout, VueAdsBar, VueAdsDrawer, VueAdsHideButton } from 'vue-ads-layout';
-
-
-export default {
-    name: 'App',
-
+  export default {
     components: {
-        VueAdsHideButton,
-        VueAdsDrawer,
-        VueAdsBar,
-        VueAdsLayout,
-
+      f7App,
+      f7Panel,
+      f7View,
+      f7Statusbar,
     },
+    data() {
+      // Demo Theme
+      let theme = 'auto';
+      if (document.location.search.indexOf('theme=') >= 0) {
+        theme = document.location.search.split('theme=')[1].split('&')[0];
+      }
 
-    data () {
-        return {
-            minifiedLeft: null,
-            minifiedRight: null,
-            hiddenLeft: null,
-            hiddenRight: true,
-        };
+      return {
+        f7Params: {
+          id: 'io.framework7.testapp',
+          theme,
+          routes,
+          popup: {
+            closeOnEscape: true,
+          },
+          sheet: {
+            closeOnEscape: true,
+          },
+          popover: {
+            closeOnEscape: true,
+          },
+          actions: {
+            closeOnEscape: true,
+          },
+        },
+      };
     },
-
-    methods: {
-        minifyLeft (minified) {
-            this.minifiedLeft = minified;
-        },
-
-        hideLeft (hidden) {
-            this.hiddenLeft = hidden;
-        },
-
-        minifyRight (minified) {
-            this.minifiedRight = minified;
-        },
-
-        hideRight (hidden) {
-            this.hiddenRight = hidden;
-        },
-    },
-};
+  };
 </script>
-
-<style lang="scss">
-
-    // @import 'assets/sass/bootstrap.min.css';
-    @import 'assets/sass/variables.scss';
-    @import 'assets/sass/reset.scss';
-    @import 'assets/sass/layout.scss';
-    @import 'assets/sass/app.scss';
-
-</style>
