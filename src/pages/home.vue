@@ -12,7 +12,7 @@
         <f7-link class="searchbar-enable" data-searchbar=".searchbar-components" icon-ios="f7:search" icon-aurora="f7:search" icon-md="material:search"></f7-link>
       </f7-nav-right>
 
-      <f7-searchbar
+      <f7-searchbar 
         class="searchbar-components"
         search-container=".components-list"
         search-in="a"
