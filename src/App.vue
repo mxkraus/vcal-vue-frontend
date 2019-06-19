@@ -11,7 +11,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+
   import { f7App, f7Panel, f7View, f7Statusbar } from 'framework7-vue';
   import routes from './routes';
 

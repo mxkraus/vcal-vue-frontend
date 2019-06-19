@@ -18,7 +18,8 @@
     </f7-navbar>
 
 
-    <h1>Home</h1>
+    <CommunityList></CommunityList>
+
 
   </f7-page>
 </template>
@@ -27,6 +28,7 @@
 /* eslint-disable */
 
   import { f7Page, f7Card, f7Navbar, f7NavLeft, f7NavTitle, f7NavTitleLarge, f7NavRight, f7BlockTitle, f7List, f7ListItem, f7Link, f7Searchbar, f7Icon } from 'framework7-vue';
+  import CommunityList from '../components/community-list';
 
   export default {
     components: {
@@ -43,6 +45,11 @@
       f7Searchbar,
       f7Icon,
       f7Card,
+      CommunityList,
     },
   };
 </script>
+
+
+
+
