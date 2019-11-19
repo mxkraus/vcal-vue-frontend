@@ -1,2 +1,3 @@
 # Vereinskalender
-Vue.js frontend rendering for PHP-Script.
+
+App based on Framework7 to display community (DE: Verein) events.
