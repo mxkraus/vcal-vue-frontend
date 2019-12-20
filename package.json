@@ -9,14 +9,14 @@
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.22",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.1.0",
     "framework7": "^4.4.3",
     "framework7-vue": "^4.4.3",
     "jquery": "^3.4.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-ads-layout": "^1.4.1",
     "vue-loader": "^15.7.0",
     "vue-resource": "^1.5.1",
@@ -32,7 +32,7 @@
     "babel-loader": "^8.0.4",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
-    "vue-template-compiler": "^2.6.10",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.27.1"
   },
   "eslintConfig": {

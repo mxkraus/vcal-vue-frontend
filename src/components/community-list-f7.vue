@@ -1,7 +1,6 @@
 <template>
     <div class="communities">
 
-        <!-- <b-form-input id="search" v-model="search" placeholder="Verein suchen"></b-form-input> -->
         <f7-input
             id="search"
             v-model="search"
@@ -11,52 +10,59 @@
             clear-button
         ></f7-input>
 
-        <div class="community" v-for="community in filteredComunity" :key="community.id">
-            
-            <b-button v-b-toggle="community.verein" variant="primary">
-                {{ community.verein_full }}
-                <b-badge variant="light">
-                    {{ getObjectSize( community.termine ) }} 
-                </b-badge>
-            </b-button>
+        <f7-list accordion-list>
+            <f7-list-item 
+                accordion-item 
+                :title="community.verein_full" 
+                :badge="getObjectSize( community.termine )"
+                class="community" 
+                v-for="community in filteredComunity" 
+                :key="community.id">
 
-            <b-collapse :id="community.verein" class="mt-2">
-                <b-list-group>
+                <f7-accordion-content>
+                    <f7-block>
+                        <f7-card
+                            :title="termin.timefrom"
+                            :content="termin.title "
+                            v-for="termin in community.termine"
+                            :key="termin.id"
+                        ></f7-card>
+                    </f7-block>
+                </f7-accordion-content>
 
-                    <b-list-group-item class="event" v-for="(value, name, index) in community.termine" :key="index">
+            </f7-list-item>
+        </f7-list>
 
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5>{{value.timefrom}}</h5>
-                            <small>Download <i class="accessible-icon"></i></small>
-                        </div>
-                        <p class="mb-1">{{ value.title }}</p>
-                        
-                    </b-list-group-item>
-
-                </b-list-group>
-            </b-collapse>
-
-        </div>
+        
 
     </div>
 </template>
 
 <script>
 
-import { f7Input } from 'framework7-vue';
+import { f7Input, f7List, f7ListItem, f7AccordionContent, f7Block, f7Card} from 'framework7-vue';
 
     export default{
         name: 'Events',
         components: {
             f7Input,
+            f7List,
+            f7ListItem,
+            f7AccordionContent,
+            f7Block,
+            f7Card
         },
         data(){
             return{
                 communities: [],
                 search: '',
-                isCollapsed: false
+                selected: '',
+                isCollapsed: false,
+                yearNow: new Date().getFullYear(),
+                yearNext: new Date().getFullYear() + 1,
+                
             }
-        },  
+        },
         methods:{
             expandChild: function(){
                 this.isCollapsed = true;
@@ -77,7 +83,7 @@ import { f7Input } from 'framework7-vue';
             }
         },
         created: function(){
-            this.$http.get('https://mxkraus.de/Vereinskalender/get_events.1.php').then( response => {
+            this.$http.get('https://mxkraus.de/Vereinskalender/get-vcal-events.php?year=2020').then( response => {
                 this.communities = this.mix( response.body );
             }, response => {
                 console.log(response.error);
@@ -89,7 +95,8 @@ import { f7Input } from 'framework7-vue';
         computed: {
             filteredComunity: function(){
                 return this.communities.filter( community => {
-                    return community.verein.toLowerCase().match(this.search) || community.verein.match(this.search);
+                    //return community.verein.toLowerCase().match(this.search) || community.verein.match(this.search);
+                    return community.verein.toLowerCase().includes(this.search.toLowerCase())
                 });
             }, 
         }
@@ -98,20 +105,23 @@ import { f7Input } from 'framework7-vue';
 
 <style lang="scss" scoped>
 
-    #search{
-        margin-bottom: 15px;
+    #search, #chooseYear{
+        padding: 15px;
+        background-color: #f8f8f8;
+    }
+    .list{
+        margin: 0;
     }
     .communities{
         height: 100%;
         width: 100%;
-        padding: 20px;
+        font-size: 16px;
         .community{
             width: 100%;
-            margin-bottom: 15px;
             cursor: pointer;
 
-            .timefrom{
-                font-weight: bold;
+            .accordion-item-content .block{
+                padding: 15px;
             }
         }
         
