@@ -13,7 +13,7 @@
     "bootstrap-vue": "^2.1.0",
     "framework7": "^4.4.3",
     "framework7-vue": "^4.4.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.11",
